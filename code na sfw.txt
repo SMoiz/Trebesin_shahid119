@@ -1,0 +1,175 @@
+\documentclass[12pt,a4paper,notitlepage]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[czech]{babel}
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+
+\begin{document}
+
+\title{Databáze voličů}
+\author{ "Bargel, Křížek, Kysela, Shahid" }
+\date{1. 11. 2021}
+\maketitle
+
+\begin{abstract}
+Tento dokument byl vypracovaný společně se všemi členy týmu a ověřuje základní znalosti \LaTeX{}, databází a projektového řízení.
+
+Tým pracoval samostatně a využíval všechny dostupné materiály na Moodle nebo internetu. Veškeré licenční a právní náležitosti jsou upraveny v tomto dokumentu.
+
+Těm, který není tento dokument určen nemají žádné právo na využití obsahu tohoto dokumentu.
+
+Veškerá data osob a předmětů jsou smyšlená a nezakládají se na skutečnosti.
+\end{abstract}
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+
+\section{Popis databáze}
+Databáze obsahuje rozhodnotí voličů ve volbách. Zároveň v tabulkách je definice skupin, jak se rozhodli.
+
+Databáze je vytvořena na jazyce MySQL a využívá veškeré technologické vlastnosti této DB.
+\newpage
+\section{Licenční informace a HW požadavky}
+\subsection{LaTeX Project Public License}
+\subsection{Hardware}
+\subsection{Software}
+\begin{itemize}
+\item{Microsoft Edge 94.0.992.50}
+\end{itemize}
+\newpage
+\section{Enumerizace hodnot}
+\subsection{Normované enumerizace}
+Kraje, Krajské města, ČSÚ
+\subsection{Custom enumerizace}
+Politické strany, Kandidáti
+\newpage
+\section{Databázová struktura}
+\subsection{ER diagram}
+\includegraphics[width=17cm]{tabulka.jpg}
+\subsection{Tabulka Informace o voliči}
+\subsubsection{Struktura}
+Tabulka Informace o voliči obsahuje informace o jednotlivých voličích jako jsou například jméno, příjmení, datum narození atd... 
+
+\begin{table}[h!]
+    \begin{center}
+    \caption{Informace o voliči}
+    \label{tab:table1}
+    \begin{tabular}{l|r|c}
+    \hline
+        1 & jméno & jméno voliče  \\
+        2 & příjmení & příjmení voliče \\  
+        3 & Datum narození & Datum narození voliče \\
+        4 & Rodiný status & Rodiný status voliče \\
+        5 & trvalý pobyt & trvalý pobyt voliče \\
+        6 & číslo občanky & číslo občanky voliče \\
+        7 & telefoní číslo & telefoní číslo voliče \\
+        8 & email & email voliče \\
+       
+    \end{tabular}
+    \end{center}
+\end{table}
+\subsubsection{Provázání tabulky}
+Many to one s tabulkou Strany
+\subsection{Tabulka Strany}
+\subsubsection{Struktura}
+Tabulka Strany obsahuje politické strany které občan může volit a počet hlasů každé strany.
+\begin{table}[h!]
+    \begin{center}
+    \caption{Strany}
+    \label{tab:table1}
+    \begin{tabular}{l|r|c}
+    \hline
+        1 & ODS & počet voličů dané strany   \\
+        2 & TOP 09 & počet voličů dané strany \\  
+        3 & KDU-ČSL & počet voličů dané strany \\
+        4 & Piráti & počet voličů dané strany \\
+        5 & Starostové a nezávyslí & počet voličů dané strany \\
+        6 & ANO & počet voličů dané strany \\
+        7 & SPD & počet voličů dané strany \\
+        8 & KSČM & počet voličů dané strany \\
+        9 & strany & PK \\
+       
+    \end{tabular}
+    \end{center}
+\end{table}
+\subsubsection{Provázání tabulky}
+Many to one s tabulkou Vítězné strany v jednotlivých krajích, one to many s tabulkou informace o voličích 
+
+
+\subsection{Tabulka Kraje}
+\subsubsection{Struktura}
+Tabulka Kraje obsahuje kraje České republiky a kolik občanů se v daném kraji zúčastnilo voleb.
+\begin{table}[h!]
+    \begin{center}
+    \caption{Kraje}
+    \label{tab:table1}
+    \begin{tabular}{l|r|c}
+    \hline
+        1 & Praha & počet voličů v daném Kraji   \\
+        2 & Středočeský & počet voličů v daném Kraji \\  
+        3 & Jihočeský & počet voličů v daném Kraji \\
+        4 & Plzenský & počet voličů v daném Kraji \\
+        5 & Karlovarský & počet voličů v daném Kraji \\
+        6 & Ustecký & počet voličů v daném Kraji \\
+        7 & Liberecký & počet voličů v daném Kraji\\
+        8 & Králove hradecký & počet voličů v daném Kraji \\
+        9 & Pardubický & počet voličů v daném Kraji \\
+        10 & Vysočina & počet voličů v daném Kraji \\
+        11 & Jihomoravský & počet voličů v daném Kraji \\
+        12 & Olomoucký & počet voličů v daném Kraji \\
+        13 & Zlínský & počet voličů v daném Kraji \\
+        14 & Moravskoslezský & počet voličů v daném Kraji \\
+        15 & Kraje & PK \\
+       
+    \end{tabular}
+    \end{center}
+\end{table}
+\subsubsection{Provázání tabulky}
+many to one s tabulkou Vítězné strany v jednotlivých krajích
+
+
+
+\subsection{Tabulka Vítězné strany v jednotlivých krajích}
+\subsubsection{Struktura}
+Tabulka Vítězné strany v jednotlivých krajích obsahuje která politická strana vyhrala ve kterém kraji.
+\begin{table}[h!]
+    \begin{center}
+    \caption{Vítězné strany v jednotlivých krajích}
+    \label{tab:table1}
+    \begin{tabular}{l|r|c}
+    \hline
+        1 & Vítězná strana & Vítězné strany v jednotlivých krajích    \\
+        
+       
+    \end{tabular}
+    \end{center}
+\end{table}
+\subsubsection{Provázání tabulky}
+One to many s tabulkou strany, One to many s tabulkou kraje, One to one s tabulkou počet voličů
+
+\subsection{Tabulka Počet voličů}
+\subsubsection{Struktura}
+Tabulka Počet voličů obsahuje přesný počet občanů s právem volit a kolik se z této skupiny občanů zúčastnilo voleb.
+\begin{table}[h!]
+    \begin{center}
+    \caption{Počet voličů}
+    \label{tab:table1}
+    \begin{tabular}{l|r|c}
+    \hline
+        1 & Počet voličů & Celkový počet občanů s právem volit    \\
+        2 & Účast & Počet občanů kteří volili    \\
+        
+       
+    \end{tabular}
+    \end{center}
+\end{table}
+\subsubsection{Provázání tabulky}
+One to one s tabulkou Vítězné strany v jednotlivých krajích
+
+
+
+\end{document}
